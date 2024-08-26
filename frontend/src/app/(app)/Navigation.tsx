@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 const Navigation = ({ user }) => {
-    const { logout } = useAuth()
+    const { logout } = useAuth({ middleware: 'auth' })
 
     const [open, setOpen] = useState(false)
 

@@ -3,11 +3,23 @@ import axios from '@/lib/axios'
 import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 
-export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+interface IAuthGuard {
+    middleware: string
+    redirectIfAuthenticated?: string
+}
+
+export const useAuth = ({
+    middleware,
+    redirectIfAuthenticated,
+}: IAuthGuard) => {
     const router = useRouter()
     const params = useParams()
 
-    const { data: user, error, mutate } = useSWR('/api/user', () =>
+    const {
+        data: user,
+        error,
+        mutate,
+    } = useSWR('/api/user', () =>
         axios
             .get('/api/user')
             .then(res => res.data)
